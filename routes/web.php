@@ -23,13 +23,22 @@ $router->get('key', 'ExampleController@show');
 
 $router->group(['prefix' => 'api/v1'], function () use ($router) {    
     //posts
-    $router->group(['prefix' => 'posts', 'middleware' => 'auth_api_key'], function() use ($router) {
-        $router->get('index', 'PostsController@index');
-        $router->get('view/{id}', 'PostsController@viewPost');
+    // $router->group(['prefix' => 'posts', 'middleware' => 'auth_api_key'], function() use ($router) {
+    //     $router->get('index', 'PostsController@index');
+    //     $router->get('view/{id}', 'PostsController@viewPost');
+    //     $router->delete('delete/{id}', 'PostsController@deletePost');
+    //     $router->put('edit/{id}', 'PostsController@updatePost');
+    //     $router->post('add', 'PostsController@createPost');
+    // });
+    $router->group(['prefix' => 'posts'], function() use ($router) {
+        $router->group([ 'middleware' => 'auth_api_key'], function() use ($router) {
+            $router->get('index', 'PostsController@index');
+            $router->get('view/{id}', 'PostsController@viewPost');
+            $router->delete('delete/{id}', 'PostsController@deletePost');
+            $router->put('edit/{id}', 'PostsController@updatePost');
+        });
         $router->post('add', 'PostsController@createPost');
-        $router->delete('delete/{id}', 'PostsController@deletePost');
-        $router->put('edit/{id}', 'PostsController@updatePost');
-    });
+        });
 
     //users
     $router->group(['prefix' => 'users'], function() use ($router) {

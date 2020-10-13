@@ -62,13 +62,48 @@ php -S localhost:8000 -t public/
 
 Copy api_token code.
 
-### Show data user (with basic auth)
+### Show data user (basic auth)
 - Creatae a new service REST
 - use "GET" method
 - use url "http://localhost:8000/api/v1/users/index"
 - Tab Authorization change with Basic Auth
 - Username fill with "bobihariadi@gmail.com"
 - Password fill with api_token you have copied
+- Click Send
+
+
+### Create data posts
+- Create a new service REST
+- use "POST" method
+- use url "http://localhost:8000/api/v1/posts/add"
+- Add Headers tab with Key "Content-Type" and Value "application/json"
+- Tab Body fill with bellow
+```json
+{
+    "title" : "sample title",
+    "body"  : "sample body",
+    "views" : "1"
+}
+```
+- Click Send
+
+
+### Show data post (Api Key)
+- Creatae a new service REST
+- use "GET" method
+- use url "http://localhost:8000/api/v1/posts/index"
+- Tab Authorization change with Api Key
+- Key fill with "api_key"
+- Value fill with api_token you have copied
+- Click Send
+
+
+### Show data post (Bearer Token)
+- Creatae a new service REST
+- use "POST" method
+- use url "http://localhost:8000/api/v1/users/sampleJwt"
+- Tab Authorization change with Bearer Token
+- Token fill with jwt_token you have copied
 - Click Send
 
 
