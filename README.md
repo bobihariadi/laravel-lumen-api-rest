@@ -9,7 +9,7 @@
 
 Laravel Lumen is a stunningly fast PHP micro-framework for building web applications with expressive, elegant syntax. We believe development must be an enjoyable, creative experience to be truly fulfilling. Lumen attempts to take the pain out of development by easing common tasks used in the majority of web projects, such as routing, database abstraction, queueing, and caching.
 
-## Sample Authentication REST API Using BASIC AUTH, API KEY and BEARER(JWT)
+## REST API Using BASIC AUTH, API KEY and Bearer(JWT) Authentication
 
 A sample of REST API using some authentication
 
