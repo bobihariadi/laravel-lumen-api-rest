@@ -39,6 +39,32 @@ php artisan migrate
 php -S localhost:8000 -t public/
 ```
 
+## Test API on POSTMAN
+### Create new user (no auth required)
+- Creaate a new service REST
+- use "POST" method
+- use url "http://localhost:8000/api/v1/users/add"
+- Add Headers tab with Key "Content-Type" and Value "application/json"
+- Tab Body fill with bellow
+```json
+{
+    "name"      : "Bobi Hariadi",
+    "email"     : "bobihariadi@gmail.com",
+    "password"  : "pass123abc"
+}
+```
+- Click Send
+
+Copy api_token cede.
+
+### Show data user (with basic auth)
+- Creatae a new service REST
+- use "GET" method
+- use url "http://localhost:8000/api/v1/users/index"
+- Tab Authorization change with Basic Auth
+- Username fill with "bobihariadi@gmail.com"
+- Password fill with api_token you have copied
+- Click Send
 
 
 ## Official Documentation
