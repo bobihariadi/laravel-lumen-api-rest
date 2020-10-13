@@ -43,7 +43,7 @@ $router->group(['prefix' => 'api/v1'], function () use ($router) {
         $router->group(['middleware' => 'auth_bearer'], function() use ($router) {
             $router->post('sampleJwt', 'UsersController@sampleJwt');
         });
-
+        
         $router->post('jwt', 'UsersController@jwt');        
         $router->post('add', 'UsersController@add');
     });
