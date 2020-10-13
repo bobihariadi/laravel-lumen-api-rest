@@ -34,7 +34,6 @@ $router->group(['prefix' => 'api/v1'], function () use ($router) {
     //users
     $router->group(['prefix' => 'users'], function() use ($router) {
         $router->group(['middleware' => 'auth_basic'], function() use ($router) {
-            $router->get('index', 'UsersController@index');
             $router->get('view/{id}', 'UsersController@view');
             $router->delete('delete/{id}', 'UsersController@delete');
             $router->put('edit/{id}', 'UsersController@edit');
@@ -43,8 +42,9 @@ $router->group(['prefix' => 'api/v1'], function () use ($router) {
         $router->group(['middleware' => 'auth_bearer'], function() use ($router) {
             $router->post('sampleJwt', 'UsersController@sampleJwt');
         });
-
+        
         $router->post('jwt', 'UsersController@jwt');        
+        $router->get('index', 'UsersController@index');
         $router->post('add', 'UsersController@add');
     });
 });
