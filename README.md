@@ -33,7 +33,7 @@ Rename .env.example to .env
 
 
 
-Create databse MySQL with name "dblumen" and then run this command
+Create databse MySQL with name "dblumen" (charset "utf8", collation "utf8_unicode_ci")  and then run this command
 
 ```bash
 php artisan migrate
