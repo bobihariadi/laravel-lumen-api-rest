@@ -55,7 +55,7 @@ php -S localhost:8000 -t public/
 ```
 - Click Send
 
-Copy api_token cede.
+Copy api_token code.
 
 ### Show data user (with basic auth)
 - Creatae a new service REST
