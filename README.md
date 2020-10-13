@@ -15,6 +15,11 @@ A sample of REST API using some authentication
 
 ## Installation
 ```bash
+composer global require "laravel/lumen-installer"
+```
+
+
+```bash
 git clone https://github.com/bobihariadi/laravel-lumen-api-rest.git
 ```
 
