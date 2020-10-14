@@ -27,8 +27,6 @@ $app->withFacades();
 
 $app->withEloquent();
 
-$app->configure('app');
-$app->configure('database');
 
 /*
 |--------------------------------------------------------------------------
@@ -63,6 +61,8 @@ $app->singleton(
 */
 
 $app->configure('app');
+$app->configure('database');
+$app->configure('endpoint');
 
 /*
 |--------------------------------------------------------------------------
@@ -75,9 +75,10 @@ $app->configure('app');
 |
 */
 
-// $app->middleware([
-//     App\Http\Middleware\ExampleMiddleware::class
-// ]);
+$app->middleware([
+    // App\Http\Middleware\ExampleMiddleware::class
+    App\Http\Middleware\CORSMiddleware::class
+]);
 
 $app->routeMiddleware([
     'auth_api_key' => App\Http\Middleware\Authenticate::class,

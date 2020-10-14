@@ -22,14 +22,7 @@ $router->get('/', function () use ($router) {
 $router->get('key', 'ExampleController@show');
 
 $router->group(['prefix' => 'api/v1'], function () use ($router) {    
-    //posts
-    // $router->group(['prefix' => 'posts', 'middleware' => 'auth_api_key'], function() use ($router) {
-    //     $router->get('index', 'PostsController@index');
-    //     $router->get('view/{id}', 'PostsController@viewPost');
-    //     $router->delete('delete/{id}', 'PostsController@deletePost');
-    //     $router->put('edit/{id}', 'PostsController@updatePost');
-    //     $router->post('add', 'PostsController@createPost');
-    // });
+    //posts    
     $router->group(['prefix' => 'posts'], function() use ($router) {
         $router->group([ 'middleware' => 'auth_api_key'], function() use ($router) {
             $router->get('index', 'PostsController@index');
@@ -56,5 +49,10 @@ $router->group(['prefix' => 'api/v1'], function () use ($router) {
         $router->post('jwt', 'UsersController@jwt');        
         $router->post('add', 'UsersController@add');
     });
+
+    $router->group(['prefix' => 'index','middleware' => 'auth_bearer'], function() use ($router) {
+        $router->post('/', 'IndexController@api');   
+    });
+
 });
 
