@@ -14,6 +14,7 @@ class GlobalHelper {
 
         $connect  = DB::connection($input["db"])->table($input["table"]);
 
+        // ======= SELECT =======
         // selected field
         /*
         "selected":[
@@ -24,6 +25,38 @@ class GlobalHelper {
             $result  = $connect->select($input["selected"]);
         }
 
+        // raw select using other agregate (able more than raw field select)
+        /*
+        "raw":[
+            ["count(id) as total"],
+            ["sum(id) as jumlah"]
+        ]
+        */
+        if (!empty($input["raw"])) {
+            $arrRaw = $input["raw"];
+            if(is_array($arrRaw[0])){   
+                $dataraw = "";             
+                foreach($arrRaw as $raw){
+                    $dataraw .= $raw[0].",";
+                }
+                $arrRaw = substr($dataraw,0,-1);
+            }else{
+                if(is_array($arrRaw)){
+                    $arrRaw = $arrRaw[0];
+                }
+            }
+            $connect->select(DB::raw($arrRaw));
+        }
+
+        // distinct select
+        /*
+        "distinct":["views","id"]
+        */
+        if(!empty($input["distinct"])) { 
+            $connect->distinct($input["distinct"]);
+        }
+
+        // ======== WHERE =========
         // where parameter
         /* 
         "where": [
@@ -70,6 +103,34 @@ class GlobalHelper {
             }
         }
 
+        // where raw parameter used when where has logic
+        /*
+        "whereraw": "field > 1"
+        */
+        if (isset($input["whereraw"])) {
+            $connect->whereRaw($input["whereraw"]);
+        }
+
+        // ============ GROUP =============
+        // group by (able more than group field)
+        // note : please mind the field table selected
+        /*
+        "groupby":["field","other field"]
+        */
+        if(!empty($input["groupby"])) {
+            if(is_array($input["groupby"])){
+                $datagroup = "";             
+                foreach($input["groupby"]as $group){
+                    $datagroup .= $group.",";
+                }
+                $arrGroup = substr($datagroup,0,-1);
+                $connect->groupByRaw(strtoupper($arrGroup));
+            }            
+            
+            $connect->groupBy(strtoupper($input["groupby"]));            
+        }
+
+        // ============= OERDER ===============
         // order by (able more tahn one order by)
         /*
         "orderby":[
@@ -88,49 +149,19 @@ class GlobalHelper {
             }
         }
 
-        // raw select using other agregate (able more than raw field select)
-        /*
-        "raw":[
-            ["count(id) as total"],
-            ["sum(id) as jumlah"]
-        ]
-        */
-        if (!empty($input["raw"])) {
-            $arrRaw = $input["raw"];
-            if(is_array($arrRaw[0])){   
-                $dataraw = "";             
-                foreach($arrRaw as $raw){
-                    $dataraw .= $raw[0].",";
-                }
-                $arrRaw = substr($dataraw,0,-1);
-            }else{
-                if(is_array($arrRaw)){
-                    $arrRaw = $arrRaw[0];
-                }
-            }
-            $connect->select(DB::raw($arrRaw));
-        }
-
-        // group by (able more than group field)
-        // note : please mind the field table selected
-        /*
-        "groupby":["field","other field"]
-        */
-
-        if(!empty($input["groupby"])) {
-            if(is_array($input["groupby"])){
-                $datagroup = "";             
-                foreach($input["groupby"]as $group){
-                    $datagroup .= $group.",";
-                }
-                $arrGroup = substr($datagroup,0,-1);
-                $connect->groupByRaw(strtoupper($arrGroup));
-            }else{                
-                $connect->groupBy(strtoupper($input["groupby"]));
-            }
-          }
-
         $count    = $connect->count();
+        //  pagging data
+        /*
+        "start":"start data",
+	    "limit":"value per page"
+        */
+        if (!empty($input['start']) || $input["start"] == '0') {
+            if (!empty($input['limit'])) {
+              $connect->skip($input['start'])->take($input['limit']);
+            }
+        }
+        
+
         $result   = $connect->get();
 
         //to show query generate
