@@ -113,13 +113,13 @@ class GlobalHelper {
 
         // where in parameter (able more than one where in paramaeters)
         /*
-        "whereIn": [        
+        "wherein": [        
             ["field", ["value","value"]],
             ["other field",["value","value","value"]]        
         ]
        */
-        if(!empty($input["whereIn"][0])) {
-            $arrWhere = $input["whereIn"];
+        if(!empty($input["wherein"][0])) {
+            $arrWhere = $input["wherein"];
             if(is_array($arrWhere[0])){
                 foreach($arrWhere as $in){       
                     $connect->whereIn(strtoupper($in[0]), $in[1]);
@@ -131,13 +131,13 @@ class GlobalHelper {
 
         // where not in parameter (able more than one where not in paramaeters)
         /*
-        "whereNotIn": [        
+        "wherenotin": [        
             ["field", ["value","value"]],
             ["other field",["value","value","value"]]        
         ]
        */
-        if(!empty($input["whereNotIn"][0])) {
-            $arrWhere = $input["whereNotIn"];
+        if(!empty($input["wherenotin"][0])) {
+            $arrWhere = $input["wherenotin"];
             if(is_array($arrWhere[0])){
                 foreach($arrWhere as $in){ 
                     $connect->whereNotIn(strtoupper($in[0]), $in[1]);
@@ -168,6 +168,8 @@ class GlobalHelper {
             }
             foreach ($search as $value) {
               if ($value["operator"] == "like")
+                $connect->Where(strtoupper($value["property"]),$value["operator"],"%".strtoupper($value["value"])."%");
+              else if($value["operator"] == "not like")
                 $connect->Where(strtoupper($value["property"]),$value["operator"],"%".strtoupper($value["value"])."%");
               else if($value["operator"] == "eq")
                 $connect->whereDate($value["property"],'=',$value["value"]);
@@ -307,13 +309,13 @@ class GlobalHelper {
 
         // where in parameter (able more than one where in paramaeters)
         /*
-        "whereIn": [        
+        "wherein": [        
             ["field", ["value","value"]],
             ["other field",["value","value","value"]]        
         ]
        */
-        if(!empty($input["whereIn"][0])) {
-            $arrWhere = $input["whereIn"];
+        if(!empty($input["wherein"][0])) {
+            $arrWhere = $input["wherein"];
             if(is_array($arrWhere[0])){
                 foreach($arrWhere as $in){       
                     $connect->whereIn(strtoupper($in[0]), $in[1]);
@@ -325,13 +327,13 @@ class GlobalHelper {
 
         // where not in parameter (able more than one where not in paramaeters)
         /*
-        "whereNotIn": [        
+        "wherenotin": [        
             ["field", ["value","value"]],
             ["other field",["value","value","value"]]        
         ]
        */
-        if(!empty($input["whereNotIn"][0])) {
-            $arrWhere = $input["whereNotIn"];
+        if(!empty($input["wherenotin"][0])) {
+            $arrWhere = $input["wherenotin"];
             if(is_array($arrWhere[0])){
                 foreach($arrWhere as $in){ 
                     $connect->whereNotIn(strtoupper($in[0]), $in[1]);
@@ -379,13 +381,13 @@ class GlobalHelper {
 
         // where in parameter (able more than one where in paramaeters)
         /*
-        "whereIn": [        
+        "wherein": [        
             ["field", ["value","value"]],
             ["other field",["value","value","value"]]        
         ]
        */
-        if(!empty($input["whereIn"][0])) {
-            $arrWhere = $input["whereIn"];
+        if(!empty($input["wherein"][0])) {
+            $arrWhere = $input["wherein"];
             if(is_array($arrWhere[0])){
                 foreach($arrWhere as $in){       
                     $connect->whereIn(strtoupper($in[0]), $in[1]);
@@ -397,13 +399,13 @@ class GlobalHelper {
 
         // where not in parameter (able more than one where not in paramaeters)
         /*
-        "whereNotIn": [        
+        "wherenotin": [        
             ["field", ["value","value"]],
             ["other field",["value","value","value"]]        
         ]
        */
-        if(!empty($input["whereNotIn"][0])) {
-            $arrWhere = $input["whereNotIn"];
+        if(!empty($input["wherenotin"][0])) {
+            $arrWhere = $input["wherenotin"];
             if(is_array($arrWhere[0])){
                 foreach($arrWhere as $in){ 
                     $connect->whereNotIn(strtoupper($in[0]), $in[1]);

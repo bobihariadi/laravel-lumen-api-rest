@@ -118,7 +118,7 @@ Method  : POST
 Auth    : Bearer Token
 Header  : Content-Type | Application/json
 Body    : raw
-Url     : http://localhost:8000/api/v1/store 
+Url     : http://localhost:8000/api/v1/index
 
 
 #### Basic
@@ -132,10 +132,175 @@ Url     : http://localhost:8000/api/v1/store
 
 #### Selected field
 ```json
-    "selected":[
-            "field","other field","other field"
-    ]
+"selected"  : [
+                "field","other field","other field"
+             ]
 ```
+
+#### Raw
+```json
+"raw"   : [
+            ["count(id) as total"],
+            ["sum(id) as jumlah"]
+         ]
+```
+
+#### Distinc
+```json
+"distinct"  : ["views","id"]
+```
+
+#### Join
+```json
+"join"  : [
+            {
+                "table" : "users",
+                "field1": "users.id",
+                "field2": "posts.id" 
+            }
+         ]
+```
+
+#### Left Join
+```json
+"leftjoin"  : [
+                {
+                    "table" : "users",
+                    "field1":"users.id",
+                    "field2": "posts.id" 
+                }
+             ]
+```
+
+#### Right Join
+```json
+"rightjoin" : [
+                {
+                    "table": "users",
+                    "field1":"users.id",
+                    "field2": "posts.id" 
+                }
+             ]
+```
+
+#### Where
+```json
+"where" : [
+            ["field","=","value"]
+         ]
+```
+
+#### Where In
+```json
+"wherein"  : [        
+                ["field", ["value","value"]],
+                ["other field",["value","value","value"]]        
+             ]
+```
+
+#### Where Not In
+```json
+"wherenotin"    : [        
+                    ["field", ["value","value"]],
+                    ["other field",["value","value","value"]]        
+                  ]
+```
+
+#### Where raw
+```json
+"whereraw"  : "field > 1"
+```
+
+#### Filter
+```json
+"filter"    : [
+                {
+                    "property"  : "field table",
+                    "operator"  : "like", // like , not like | for date  eq(=) , gt(>=) , lt(<=)
+                    "value"     : "value table" 
+                }
+              ]
+```
+
+#### Group By
+```json
+"groupby"   : ["field","other field"]
+```
+
+#### Order By
+```json
+"orderby"   : [
+                ["field","DESC"],
+                ["other field", "ASC"]
+              ]
+```
+
+#### Start and Limit
+```json
+"start" : "start data",
+"limit" : "value per page"
+```
+
+
+### StoreController
+
+Method  : POST
+Auth    : Bearer Token
+Header  : Content-Type | Application/json
+Body    : raw
+Url     : http://localhost:8000/api/v1/store
+
+
+#### Insert
+
+if at data inserted field pk(primary key), so before insert data will be check first
+
+```json
+"action"    : "insert",
+"db"        : "mysql",
+"table"     : "posts",
+"pk"        : "id",
+"data"      :[
+                {
+                    "title" : "sample title4",
+                    "body"  : "sample body4",
+                    "views" : "1"
+                }
+            ]
+```
+
+#### Update
+
+For update data where parameter we can use (where, wherein, wherenotin)
+
+```json
+"action"    : "update",
+"db"        : "mysql",
+"table"     : "posts",
+"data"      : {
+                "title" : "sample title4",
+                "body"  : "sample body5",
+                "views" : "1"
+            },
+"where"     : {
+                "id" : "5"
+            }
+```
+
+#### Delete
+
+For delete data where parameter we can use (where, wherein, wherenotin)
+
+```json
+"action"    : "delete",
+"db"        : "mysql",
+"table"     : "posts",
+"where"     : {
+                "id" : "7"
+            }
+```
+
+
 
 ### About me
 
