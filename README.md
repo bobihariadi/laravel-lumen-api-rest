@@ -145,7 +145,7 @@ Url     : http://localhost:8000/api/v1/index
          ]
 ```
 
-#### Distinc
+#### Distinct
 ```json
 "distinct"  : ["views","id"]
 ```
