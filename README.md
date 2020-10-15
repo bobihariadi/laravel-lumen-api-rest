@@ -212,11 +212,16 @@ Url     : http://localhost:8000/api/v1/index
 ```
 
 #### Filter
+
+Operator can be used is 
+
+like , not like | for date  eq(=) , gt(>=) , lt(<=)
+
 ```json
 "filter"    : [
                 {
                     "property"  : "field table",
-                    "operator"  : "like", // like , not like | for date  eq(=) , gt(>=) , lt(<=)
+                    "operator"  : "like",
                     "value"     : "value table" 
                 }
               ]
