@@ -107,6 +107,36 @@ Copy api_token code.
 - Click Send
 
 
+
+## Globals Parameter IndexController and StoreController
+
+Documentation for globally "body" parameter which make API be simple
+
+### IndexController
+
+Method  : POST
+Auth    : Bearer Token
+Header  : Content-Type | Application/json
+Body    : raw
+Url     : http://localhost:8000/api/v1/store 
+
+
+#### Basic
+```json
+{
+	"action"    :"index",
+	"db"        :"mysql",
+	"table"     :"posts"
+}
+```
+
+#### Selected field
+```json
+    "selected":[
+            "field","other field","other field"
+    ]
+```
+
 ### About me
 
 https://bobihariadi.github.io/my-profile/

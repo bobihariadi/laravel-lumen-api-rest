@@ -222,10 +222,10 @@ class GlobalHelper {
         "start":"start data",
 	    "limit":"value per page"
         */
-        if (!empty($input['start']) || $input["start"] == '0') {
+        if (!empty($input['start'])) {            
             if (!empty($input['limit'])) {
-              $connect->skip($input['start'])->take($input['limit']);
-            }
+                $connect->skip($input['start'])->take($input['limit']);
+            }            
         }
         
 
