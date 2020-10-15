@@ -36,10 +36,10 @@ $router->group(['prefix' => 'api/v1'], function () use ($router) {
     //users
     $router->group(['prefix' => 'users'], function() use ($router) {
         $router->group(['middleware' => 'auth_basic'], function() use ($router) {
-            $router->get('index', 'UsersController@index'); 
             $router->get('view/{id}', 'UsersController@view');
             $router->delete('delete/{id}', 'UsersController@delete');
             $router->put('edit/{id}', 'UsersController@edit');
+            $router->get('index', 'UsersController@index'); 
         });
         
         $router->group(['middleware' => 'auth_bearer'], function() use ($router) {
@@ -50,8 +50,17 @@ $router->group(['prefix' => 'api/v1'], function () use ($router) {
         $router->post('add', 'UsersController@add');
     });
 
-    $router->group(['prefix' => 'index','middleware' => 'auth_bearer'], function() use ($router) {
-        $router->post('/', 'IndexController@api');   
+    // Index Globals
+    $router->group(['prefix' => 'index'], function() use ($router) {
+        $router->group(['middleware' => 'auth_bearer'], function() use ($router) {
+            $router->post('/', 'IndexController@api');
+        });
+        $router->post('/show', 'IndexController@show');
+    });
+
+    // Store Globals
+    $router->group(['prefix' => 'store','middleware' => 'auth_bearer'], function() use ($router) {
+        $router->post('/', 'StoreController@api');
     });
 
 });

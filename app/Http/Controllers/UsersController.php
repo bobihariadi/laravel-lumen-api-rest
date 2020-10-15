@@ -72,21 +72,30 @@ class UsersController extends Controller
     //update user
     public function edit(Request $request, $id){
         $user = User::find($id);
-        $post->update($request->all());
 
-        return response()->json($post);
+        //update JWT
+        $payload = [
+            'iss' => "bearer", // Issuer of the token
+            'sub' => $request['email'], // Subject of the token
+            'exp' => time() + 60*60*12 // Expiration time
+        ];
+         $request['jwt_token']   = JWT::encode($payload, env('JWT_SECRET'));
+
+        $user->update($request->all());
+
+        return response()->json($user);
     }
 
     //view user
     public function view($id){
-        $post = User::find($id);
-        return response()->json($post);
+        $user = User::find($id);
+        return response()->json($user);
     }
 
     //delete user
     public function delete($id){
-        $post = User::find($id);
-        $post->delete();
+        $user = User::find($id);
+        $user->delete();
         return response()->json("remove successfully.");
     }    
 }

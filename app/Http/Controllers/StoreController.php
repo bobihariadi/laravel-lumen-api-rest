@@ -8,7 +8,7 @@ use App\Helper\GlobalHelper;
 use Illuminate\Support\Str;
 
 
-class IndexController extends Controller
+class StoreController extends Controller
 {
     /**
      * Create a new controller instance.
@@ -27,12 +27,15 @@ class IndexController extends Controller
         return response()->json($response);
     }
 
-    private function index($input){
-        return GlobalHelper::index($input);
+    private function insert($input){
+        return GlobalHelper::insert($input);
     }
-    
-    public function show()    {
-        $aa = config('endpoint.sampleEndpoint');
-        return $aa;
+
+    private function update($input){
+        return GlobalHelper::update($input);
+    }
+
+    private function delete($input){
+        return GlobalHelper::delete($input);
     }
 }

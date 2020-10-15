@@ -16,8 +16,8 @@ class Post extends Model implements AuthenticatableContract, AuthorizableContrac
         'title', 'body', 'views'
     ];
 
-    // protected $casts = [
-    //     'created_at' => 'datetime:Y-m-d h:i:s'
-    // ];
+    protected $casts = [
+        'created_at' => 'datetime:Y-m-d h:i:s'
+    ];
 
 }
