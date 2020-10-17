@@ -324,47 +324,42 @@ Try this api on your postman, ALL methot used GET.
 
 
 #### client GET
-
+```json
 Method  : GET
-
 Url     : http://localhost:8000/api/v1/client/get
-
+```
 
 
 
 #### client GET with Basic Auth
-
+```json
 Method  : GET
-
 Url     : http://localhost:8000/api/v1/client/get_basic
-
+```
 
 
 
 #### client GET with Api Key Auth
-
+```json
 Method  : GET
-
 Url     : http://localhost:8000/api/v1/client/get_api_key
-
+```
 
 
 
 #### client POST
-
+```json
 Method  : GET
-
 Url     : http://localhost:8000/api/v1/client/post
-
+```
 
 
 
 #### client POST
-
+```json
 Method  : GET
-
 Url     : http://localhost:8000/api/v1/client/post_bearer
-
+```
 
 
 
