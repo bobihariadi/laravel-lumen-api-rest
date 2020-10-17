@@ -39,8 +39,8 @@ $router->group(['prefix' => 'api/v1'], function () use ($router) {
             $router->get('view/{id}', 'UsersController@view');
             $router->delete('delete/{id}', 'UsersController@delete');
             $router->put('edit/{id}', 'UsersController@edit');
-            $router->get('index', 'UsersController@index'); 
         });
+        $router->get('index', 'UsersController@index'); 
         
         $router->group(['middleware' => 'auth_bearer'], function() use ($router) {
             $router->post('sampleJwt', 'UsersController@sampleJwt');
@@ -61,6 +61,15 @@ $router->group(['prefix' => 'api/v1'], function () use ($router) {
     // Store Globals
     $router->group(['prefix' => 'store','middleware' => 'auth_bearer'], function() use ($router) {
         $router->post('/', 'StoreController@api');
+    });
+
+    // Client
+    $router->group(['prefix' => 'client'], function() use ($router) {
+        $router->get('/get', 'ClientController@getSimple');
+        $router->get('/get_basic', 'ClientController@getBasic');
+        $router->get('/get_api_key', 'ClientController@getApiKey');
+        $router->get('/post', 'ClientController@postSimple');
+        $router->get('/post_bearer', 'ClientController@postBearer');
     });
 
 });

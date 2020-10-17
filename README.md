@@ -306,6 +306,51 @@ For delete data where parameter we can use (where, wherein, wherenotin)
 ```
 
 
+## As a Client
+
+at the ClientController, we have made some method and auth to get other API's
+
+
+if you get an error SSL when try this client, please see this video bellow
+
+
+https://www.youtube.com/watch?v=HYQduDafTLg&ab_channel=TarekMesalam
+
+
+Try this api on your postman, ALL methot used GET.
+
+
+### client GET
+
+Method  : GET
+Url     : http://localhost:8000/api/v1/client/get
+
+
+### client GET with Basic Auth
+
+Method  : GET
+Url     : http://localhost:8000/api/v1/client/get_basic
+
+
+### client GET with Api Key Auth
+
+Method  : GET
+Url     : http://localhost:8000/api/v1/client/get_api_key
+
+
+
+### client POST
+
+Method  : GET
+Url     : http://localhost:8000/api/v1/client/post
+
+
+### client POST
+
+Method  : GET
+Url     : http://localhost:8000/api/v1/client/post_bearer
+
+
 
 ### About me
 
