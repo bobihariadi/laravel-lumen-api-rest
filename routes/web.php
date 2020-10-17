@@ -19,6 +19,10 @@ $router->get('/', function () use ($router) {
     return $router->app->version();
 });
 
+$router->get('/api/documentation', function () use ($router) {
+    return view('index',['url'=>"asdfsdf"]);
+});
+
 $router->get('key', 'ExampleController@show');
 
 $router->group(['prefix' => 'api/v1'], function () use ($router) {    

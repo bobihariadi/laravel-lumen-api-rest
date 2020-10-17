@@ -10,17 +10,30 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 use Firebase\JWT\JWT;
 
+   
+ /**
+ * @OA\Get(
+ *     path="/users/index",
+ *     summary="List all users",
+ *     operationId="listUsers",
+ *     tags={"Users"},
+ *     @OA\Response(
+ *         response=200,
+ *         description="An paged array of users",
+ *         @OA\Schema(ref="#/components/schemas/Pets"),
+ *         @OA\Header(header="x-next", @OA\Schema(type="string"), description="A link to the next page of responses")
+ *     ),
+ *     @OA\Response(
+ *         response="default",
+ *         description="unexpected error",
+ *         @OA\Schema(ref="#/components/schemas/Error")
+ *     )
+ * )
+ */
+
 class UsersController extends Controller
 {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct(Request $request)
-    {
-        $this->request = $request;
-    }
+    
 
     public function sampleJwt(Request $request){
         $token = $request->bearerToken();
