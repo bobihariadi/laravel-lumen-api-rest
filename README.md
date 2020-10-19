@@ -370,6 +370,9 @@ to install openapi at your laravel, please see bellow url
 [a link](http://niceprogrammer.com/lumen-api-tutorial-documentation-using-swagger-ui/)
 
 
+additional setting to enable syntax "php artisan swg:scan" you can see at folder app/Consule/Kernel.php
+
+
 
 ### About me
 
