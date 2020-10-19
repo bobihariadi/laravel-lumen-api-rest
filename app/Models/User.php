@@ -49,6 +49,20 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
  * )
  */
 
+ /**
+ *  @OA\Schema(
+ *      schema="SampleUsersUpdate",
+ *      @OA\Property(
+ *          property="name",
+ *          type="string"
+ *      ),
+ *      @OA\Property(
+ *          property="email",
+ *          type="string"
+ *      )
+ * )
+ */
+
     /**
      * The attributes that are mass assignable.
      *

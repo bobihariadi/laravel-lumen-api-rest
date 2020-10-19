@@ -1,7 +1,7 @@
 {
     "openapi": "3.0.0",
     "info": {
-        "title": "Lumen-8 Swagger Documentation",
+        "title": "Lumen-8 Swagger/OpenAPI Documentation",
         "description": "This is api lumen-8 documentation",
         "termsOfService": "https://github.com/bobihariadi/laravel-lumen-api-rest",
         "contact": {
@@ -20,34 +20,381 @@
         }
     ],
     "paths": {
+        "/posts/index": {
+            "get": {
+                "tags": [
+                    "Posts"
+                ],
+                "summary": "List of Post",
+                "description": "This api to get all posts",
+                "operationId": "IndexPost",
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    }
+                },
+                "security": [
+                    {
+                        "apikeyAuth": []
+                    }
+                ]
+            }
+        },
+        "/posts/add": {
+            "post": {
+                "tags": [
+                    "Posts"
+                ],
+                "summary": "Add Posts",
+                "description": "This api to add posts",
+                "operationId": "AddPosts",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/SamplePostsInsert"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Posts"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/posts/view/{id}": {
+            "get": {
+                "tags": [
+                    "Posts"
+                ],
+                "summary": "View Post",
+                "description": "This api to view post",
+                "operationId": "ViewPossts",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/general--id"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Posts"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "apikeyAuth": []
+                    }
+                ]
+            }
+        },
+        "/posts/delete/{id}": {
+            "delete": {
+                "tags": [
+                    "Posts"
+                ],
+                "summary": "Delete Posts",
+                "description": "This api to delete posts",
+                "operationId": "DeletePosts",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/general--id"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Posts"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "apikeyAuth": []
+                    }
+                ]
+            }
+        },
+        "/posts/edit/{id}": {
+            "put": {
+                "tags": [
+                    "Posts"
+                ],
+                "summary": "Update Posts",
+                "operationId": "EditUsers",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/general--id"
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/SamplePostsInsert"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Posts"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "apikeyAuth": []
+                    }
+                ]
+            }
+        },
+        "/users/sampleJwt": {
+            "post": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Sample Bearer Auth used JWT",
+                "description": "This Api to get Sample Bearer Auth used JWT",
+                "operationId": "BearerUsers",
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
         "/users/index": {
             "get": {
                 "tags": [
                     "Users"
                 ],
                 "summary": "List all users",
+                "description": "This api to get all users",
                 "operationId": "listUsers",
                 "responses": {
                     "200": {
-                        "description": "An paged array of users",
-                        "headers": {
-                            "x-next": {
-                                "description": "A link to the next page of responses",
+                        "description": "successful operation"
+                    }
+                }
+            }
+        },
+        "/users/add": {
+            "post": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Add User",
+                "description": "This api to add users",
+                "operationId": "AddUsers",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/SampleUsersUpdate"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "content": {
+                            "application/json": {
                                 "schema": {
-                                    "type": "string"
+                                    "$ref": "#/components/schemas/Users"
                                 }
                             }
                         }
-                    },
-                    "default": {
-                        "description": "unexpected error"
                     }
                 }
+            }
+        },
+        "/users/edit/{id}": {
+            "put": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Update User",
+                "description": "This api to edit users",
+                "operationId": "EditUsers",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/general--id"
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/SampleUsersUpdate"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Users"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "basicAuth": []
+                    }
+                ]
+            }
+        },
+        "/users/view/{id}": {
+            "get": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "View User",
+                "description": "this api to view user",
+                "operationId": "ViewUsers",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/general--id"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Users"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "basicAuth": []
+                    }
+                ]
+            }
+        },
+        "/users/delete/{id}": {
+            "delete": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Delete User",
+                "description": "This api to delete users",
+                "operationId": "DeleteUsers",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/general--id"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Users"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "basicAuth": []
+                    }
+                ]
             }
         }
     },
     "components": {
         "schemas": {
+            "Posts": {
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "title": {
+                        "type": "string"
+                    },
+                    "body": {
+                        "type": "string"
+                    },
+                    "view": {
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "create_at": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "update_at": {
+                        "type": "string",
+                        "format": "date-time"
+                    }
+                },
+                "type": "object"
+            },
+            "SamplePostsInsert": {
+                "properties": {
+                    "title": {
+                        "type": "string"
+                    },
+                    "body": {
+                        "type": "string"
+                    },
+                    "views": {
+                        "type": "integer",
+                        "format": "int64"
+                    }
+                },
+                "type": "object"
+            },
             "Users": {
                 "properties": {
                     "id": {
@@ -76,7 +423,69 @@
                     }
                 },
                 "type": "object"
+            },
+            "SampleUsersUpdate": {
+                "properties": {
+                    "name": {
+                        "type": "string"
+                    },
+                    "email": {
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "parameters": {
+            "general--id": {
+                "name": "id",
+                "in": "path",
+                "description": "Parameter id should be in integer",
+                "required": true,
+                "schema": {
+                    "type": "integer"
+                }
+            }
+        },
+        "securitySchemes": {
+            "apikeyAuth": {
+                "type": "apiKey",
+                "description": "Login with key and value to get the authentication token",
+                "name": "api_key",
+                "in": "header"
+            },
+            "basicAuth": {
+                "type": "http",
+                "description": "Login with username and password to get the authentication token",
+                "name": "Basic Authentication",
+                "scheme": "basic"
+            },
+            "bearerAuth": {
+                "type": "http",
+                "description": "Login with email and password to get the authentication token",
+                "name": "Token based Based",
+                "in": "header",
+                "bearerFormat": "JWT",
+                "scheme": "bearer"
             }
         }
-    }
+    },
+    "tags": [
+        {
+            "name": "Posts",
+            "description": "API Endpoints of Post",
+            "externalDocs": {
+                "description": "Find out more",
+                "url": "http://swagger.io"
+            }
+        },
+        {
+            "name": "Users",
+            "description": "API Endpoints of User",
+            "externalDocs": {
+                "description": "Find out more",
+                "url": "http://swagger.io"
+            }
+        }
+    ]
 }

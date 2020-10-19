@@ -10,7 +10,7 @@ use Laravel\Lumen\Routing\Controller as BaseController;
  * @OA\OpenApi(
  *     @OA\Info(
  *         version="1.0.0",
- *         title="Lumen-8 Swagger Documentation",
+ *         title="Lumen-8 Swagger/OpenAPI Documentation",
  *         description="This is api lumen-8 documentation",
  *         termsOfService="https://github.com/bobihariadi/laravel-lumen-api-rest",
  *         @OA\Contact(email="bobihariadi@gmail.com"),

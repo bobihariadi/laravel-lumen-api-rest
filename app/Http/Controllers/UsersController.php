@@ -10,31 +10,48 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 use Firebase\JWT\JWT;
 
-   
- /**
- * @OA\Get(
- *     path="/users/index",
- *     summary="List all users",
- *     operationId="listUsers",
- *     tags={"Users"},
- *     @OA\Response(
- *         response=200,
- *         description="An paged array of users",
- *         @OA\Schema(ref="#/components/schemas/Pets"),
- *         @OA\Header(header="x-next", @OA\Schema(type="string"), description="A link to the next page of responses")
- *     ),
- *     @OA\Response(
- *         response="default",
- *         description="unexpected error",
- *         @OA\Schema(ref="#/components/schemas/Error")
+/**
+* @OA\Tag(
+ *     name="Users",
+ *     description="API Endpoints of User",
+ *     @OA\ExternalDocumentation(
+ *         description="Find out more",
+ *         url="http://swagger.io"
  *     )
  * )
+*/
+
+/**
+ * @OA\Parameter(
+ *      parameter="general--id",
+ *      in="path",
+ *      name="id",
+ *      required=true,
+ *      description="Parameter id should be in integer",
+ *      @OA\Schema(
+ *          type="integer"
+ *      )
+ * )
  */
+
 
 class UsersController extends Controller
 {
     
-
+    /**
+     * @OA\Post(
+     *     path="/users/sampleJwt",
+     *     summary="Sample Bearer Auth used JWT",
+     *     operationId="BearerUsers",
+     *     tags={"Users"},
+     *     description="This Api to get Sample Bearer Auth used JWT",
+     *      @OA\Response(
+     *          response=200,
+     *          description="successful operation"
+     *      ),
+     *      security={{ "bearerAuth":{} }}     
+     * )
+     */
     public function sampleJwt(Request $request){
         $token = $request->bearerToken();
         $decoded = JWT::decode($token, env('JWT_SECRET'), array('HS256'));
@@ -57,12 +74,44 @@ class UsersController extends Controller
        return $return;
 
     }
+
+    /**
+     * @OA\Get(
+     *     path="/users/index",
+     *     summary="List all users",
+     *     operationId="listUsers",
+     *     description="This api to get all users",
+     *     tags={"Users"},
+     *      @OA\Response(
+     *          response=200,
+     *          description="successful operation"
+     *      )
+     * )
+     */
     //list user
     public function index(){
         $post = User::all();
         return response()->json($post);
     }
 
+    /**
+     * @OA\Post(
+     *      path="/users/add",
+     *      summary="Add User",
+     *      operationId="AddUsers",
+     *      description="This api to add users",
+     *      tags={"Users"},
+     *      @OA\RequestBody(
+     *          required=true,
+     *          @OA\JsonContent(ref="#/components/schemas/SampleUsersUpdate")
+     *      ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="successful operation",
+     *          @OA\JsonContent(ref="#/components/schemas/Users")
+     *      )
+     * )
+     */
     //create new user
     public function add(Request $request){
         //create JWT
@@ -82,6 +131,28 @@ class UsersController extends Controller
         return response()->json($user);
     }
 
+    /**
+     * @OA\Put(
+     *      path="/users/edit/{id}",
+     *      summary="Update User",
+     *      operationId="EditUsers",
+     *      description="This api to edit users",
+     *      tags={"Users"},
+     *      @OA\Parameter(
+     *          ref="#/components/parameters/general--id"
+     *      ),
+     *      @OA\RequestBody(
+     *          required=true,
+     *          @OA\JsonContent(ref="#/components/schemas/SampleUsersUpdate")
+     *      ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="successful operation",
+     *          @OA\JsonContent(ref="#/components/schemas/Users")
+     *      ),
+     *      security={{ "basicAuth":{} }}
+     * )
+     */
     //update user
     public function edit(Request $request, $id){
         $user = User::find($id);
@@ -99,12 +170,48 @@ class UsersController extends Controller
         return response()->json($user);
     }
 
+    /**
+     * @OA\Get(
+     *      path="/users/view/{id}",
+     *      summary="View User",
+     *      operationId="ViewUsers",
+     *      description="this api to view user",
+     *      tags={"Users"},
+     *      @OA\Parameter(
+     *          ref="#/components/parameters/general--id"
+     *      ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="successful operation",
+     *          @OA\JsonContent(ref="#/components/schemas/Users")
+     *      ),
+     *      security={{ "basicAuth":{} }}
+     * )
+     */
     //view user
     public function view($id){
         $user = User::find($id);
         return response()->json($user);
     }
 
+    /**
+     * @OA\Delete(
+     *      path="/users/delete/{id}",
+     *      summary="Delete User",
+     *      operationId="DeleteUsers",
+     *      description="This api to delete users",
+     *      tags={"Users"},
+     *      @OA\Parameter(
+     *          ref="#/components/parameters/general--id"
+     *      ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="successful operation",
+     *          @OA\JsonContent(ref="#/components/schemas/Users")
+     *      ),
+     *      security={{ "basicAuth":{} }}
+     * )
+     */
     //delete user
     public function delete($id){
         $user = User::find($id);

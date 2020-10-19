@@ -33,6 +33,17 @@ class Authenticate
      * @param  string|null  $guard
      * @return mixed
      */
+
+     /**
+     * @OA\SecurityScheme(
+     *     type="apiKey",
+     *     description="Login with key and value to get the authentication token",
+     *     name="api_key",
+     *     in="header",
+     *     securityScheme="apikeyAuth",
+     * )
+     */
+
     public function handle($request, Closure $next, $guard = null)
     {
         if ($this->auth->guard($guard)->guest()) {

@@ -44,12 +44,12 @@ $router->group(['prefix' => 'api/v1'], function () use ($router) {
             $router->delete('delete/{id}', 'UsersController@delete');
             $router->put('edit/{id}', 'UsersController@edit');
         });
-        $router->get('index', 'UsersController@index'); 
         
         $router->group(['middleware' => 'auth_bearer'], function() use ($router) {
             $router->post('sampleJwt', 'UsersController@sampleJwt');
         });
         
+        $router->get('index', 'UsersController@index'); 
         $router->post('jwt', 'UsersController@jwt');        
         $router->post('add', 'UsersController@add');
     });

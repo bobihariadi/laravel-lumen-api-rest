@@ -14,6 +14,16 @@ class BasicMiddleware
      * @param  \Closure  $next
      * @return mixed
      */
+
+     /**
+     * @OA\SecurityScheme(
+     *     type="http",
+     *     description="Login with username and password to get the authentication token",
+     *     name="Basic Authentication",
+     *     scheme="basic",
+     *     securityScheme="basicAuth",
+     * )
+     */
     public function handle($request, Closure $next)
     {
         if(strtolower(substr($request->header('authorization'),0,5)) === 'basic'){//basic  
